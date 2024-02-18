@@ -1,0 +1,101 @@
+﻿@using WebApplication1.Models.Database
+@model Lead
+@{
+    ViewBag.Title = "EditLead";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post" class="form-group">
+    <h2>Add New Lead</h2>
+    <div class="row shadow">
+        <div class="col-md-4 my-3">
+            @Html.Label("Status")
+            @Html.DropDownListFor(x => x.LeadStatusID, (List<SelectListItem>)ViewBag.LeadStatus, new { @class = "form-control" })
+        </div>
+        <div class="col-md-4 my-3">
+            @Html.Label("Source")
+            @Html.DropDownListFor(x => x.LeadSourceID, (List<SelectListItem>)ViewBag.LeadSource, new { @class = "form-control" })
+        </div>
+        <div class="col-md-4 my-3">
+            @Html.Label("Assigned")
+            @Html.DropDownListFor(x => x.AssignedID, (List<SelectListItem>)ViewBag.Assigned, new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row shadow">
+        <div class="col-md-12 my-3">
+            @Html.Label("Tag")
+            @Html.DropDownListFor(x => x.TagID, (List<SelectListItem>)ViewBag.Tag, new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row shadow">
+        <div class="col-md-6 mt-3">
+            @Html.Label("Name")
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        </div>
+        <div class="col-md-6 mt-3">
+            @Html.Label("Address")
+            @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+            <br />
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Position")
+            @Html.TextBoxFor(x => x.Position, new { @class = "form-control" })
+        </div>
+        <div class="col-md-6">
+            @Html.Label("City")
+            @Html.TextBoxFor(x => x.City, new { @class = "form-control" })
+            <br />
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Email Address")
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+        </div>
+        <div class="col-md-6">
+            @Html.Label("State")
+            @Html.TextBoxFor(x => x.State, new { @class = "form-control" })
+            <br />
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Website")
+            @Html.TextBoxFor(x => x.Website, new { @class = "form-control" })
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Country")
+            @Html.DropDownListFor(x => x.CountryID, (List<SelectListItem>)ViewBag.Country, new { @class = "form-control" })
+            <br />
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Phone")
+            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Zip Code")
+            @Html.TextBoxFor(x => x.ZipCode, new { @class = "form-control" })
+            <br />
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Lead Value")
+            @Html.TextBoxFor(x => x.LeadValue, new { @class = "form-control", type = "number" })
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Default Language")
+            @Html.DropDownListFor(x => x.LanguageID, (List<SelectListItem>)ViewBag.Language, new { @class = "form-control" })
+            <br />
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Company")
+            @Html.TextBoxFor(x => x.Company, new { @class = "form-control" })
+            <br />
+        </div>
+        <div class="col-md-12">
+            @Html.Label("Description")
+            @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+            <br />
+        </div>
+    </div>
+    <br />
+    <button class="btn btn-primary">Save</button>
+</form>
+

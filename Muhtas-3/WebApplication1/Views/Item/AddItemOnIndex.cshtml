@@ -1,0 +1,29 @@
+﻿@using WebApplication1.Models.Database
+@model Item
+@{
+    ViewBag.Title = "AddItemOnIndex";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form class="form-group" method="post">
+    @Html.Label("Item Name")
+    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    <br />
+    @Html.Label("Description")
+    @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+    <br />
+    @Html.Label("Rate-USD (Base Currency)")
+    @Html.TextBoxFor(x => x.Rate, new { @class = "form-control" })
+    <br />
+    @Html.Label("Tax")
+    @Html.DropDownListFor(x => x.TaxID, (List<SelectListItem>)ViewBag.Taxes, new { @class = "form-control" })
+    <br />
+    @Html.Label("Unit")
+    @Html.TextBoxFor(x => x.Unit, new { @class = "form-control" })
+    <br />
+    @Html.Label("Item Group")
+    @Html.DropDownListFor(x => x.ItemGroup, (List<SelectListItem>)ViewBag.Itemgroup, "Select Item Group", new { @class = "form-control" })
+    <br />
+    <button class="btn btn-primary">Save</button>
+</form>
+

@@ -1,0 +1,30 @@
+﻿@using WebApplication1.Models.Database
+@model Contact
+@{
+    ViewBag.Title = "AddContact";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+        <form class="form-group " method="post">
+            @Html.Label("FirstName")
+            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+
+            @Html.Label("LastName")
+            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+
+            @Html.Label("Position")
+            @Html.TextBoxFor(x => x.Position, new { @class = "form-control" })
+
+            @Html.Label("Email")
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+
+            @Html.Label("Phone")
+            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+
+
+            @Html.Label("Customer Id")
+            @Html.TextBoxFor(x => x.CustomerId, new { @class = "form-control", @readonly = "readonly", @Value = ViewBag.contact })
+            <button class="btn btn-primary">Kaydet</button>
+        </form>
+    

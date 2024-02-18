@@ -1,0 +1,75 @@
+﻿@using WebApplication1.Models.Database
+@model List<Subscription>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<a class="btn btn-primary" href="/Subscription/NewSubscription">New Subscription</a>
+<a class="btn btn-info" href="/Subscription/SubPDF">Export</a>
+
+
+<div class="mt-2">
+    <h2> Subscription Summary</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <span class="text-bold">@ViewBag.subcount </span> <span style="color:deepskyblue;">Not Subscribed</span>
+        </div>
+        <div class="col-md-6">
+            <span class="text-bold">@ViewBag.activeSub</span> <span style="color:green;">Active</span>
+        </div>
+    </div>
+
+</div>
+<br />
+<table id="tblSub" class="table table-striped mt-3">
+    <thead>
+        <tr class="table-danger">
+            <th>#</th>
+            <th>Subscription Name</th>
+            <th>Customer</th>
+            <th>Project</th>
+            <th>Status</th>
+            <th>Subscribe</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.SubName</td>
+            <td>@item.Customer.Company</td>
+            <td></td>
+            <td>
+                @if (item.Status == true)
+                {
+                    <span>Subscribed</span>
+                }
+                else
+                {
+                    <span>Not Subscribed</span>
+                }
+            </td>
+            <td><a class="btn btn-success" href="/Subscription/Subscribe/@item.ID"><span class="text-white">Subscribe</span></a></td>
+            <td><a class="btn btn-warning" href="/Subscription/EditSub/@item.ID">Edit</a></td>
+            <td><a class="btn btn-danger" href="/Subscription/DeleteSub/@item.ID">Delete</a></td>
+        </tr>
+    }
+
+
+</table>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+
+    $('#tblSub').dataTable({});
+
+</script>
+

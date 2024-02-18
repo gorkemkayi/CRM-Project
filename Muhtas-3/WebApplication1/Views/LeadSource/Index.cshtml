@@ -1,0 +1,42 @@
+﻿@using WebApplication1.Models.Database
+@model List<LeadSource>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-3">
+    <a class="btn btn-primary" href="/LeadSource/NewSource">New Source</a>
+    <a class="btn btn-info" href="/LeadSource/LeadSourcePDF">Export</a>
+    <br /><br />
+    <table id="tblLeadSource" class="table table-bordered shadow mt-4">
+        <thead>
+            <tr class="bg-danger">
+                <th>ID</th>
+                <th style="width:70%">Name</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.Name</td>
+                <td class="text-center"><a class="fas fa-edit" href="/LeadSource/EditSource/@item.ID" style="color:yellowgreen;"></a>  <a class="fas fa-trash ml-3" style="color:red;" href="/LeadStatus/DeleteStatus/@item.ID"></a></td>
+            </tr>
+        }
+    </table>
+</div>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+
+    $('#tblLeadSource').dataTable({});
+
+</script>
+

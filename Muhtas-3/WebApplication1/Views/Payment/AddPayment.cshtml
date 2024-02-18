@@ -1,0 +1,23 @@
+﻿@using WebApplication1.Models.Database;
+@model Payment
+@{
+    ViewBag.Title = "AddPayment";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form class="form-group" method="post">
+    @Html.Label("Amount Received")
+    @Html.TextBoxFor(x => x.AmountReceived, new { @class = "form-control" })
+    <br />
+    @Html.Label("Payment Date")
+    @Html.TextBoxFor(x => x.PaymentDate, new { @class = "form-control" })
+    <br />
+    @Html.Label("Payment Method")
+    @Html.DropDownListFor(x => x.PaymentMode, (List<SelectListItem>)@ViewBag.paymentMode, new { @class = "form-control" })
+    <br />
+    @Html.Label("InvoiceID")
+    @Html.TextBoxFor(x=>x.InvoiceID,new {@Value= ViewBag.InvoiceID,@class="form-control" })
+<br />
+    <button class="btn btn-primary">Kaydet</button>
+</form>
+

@@ -1,0 +1,16 @@
+﻿@using WebApplication1.Models.Database
+@model Reply
+@{
+    ViewBag.Title = "AddReply";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form class="form-group" method="post">
+    @Html.Label("Support ID")
+    @Html.TextBoxFor(x=>x.SupportID,new { @class = "form-control", @readonly="readonly",@Value=ViewBag.SupportID})
+    <br />
+    @Html.Label("Message")
+    @Html.TextAreaFor(x => x.Message, new { @class = "form-control" })    
+    <br />    
+    <button class="btn btn-primary">Save</button>
+</form>

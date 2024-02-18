@@ -1,0 +1,107 @@
+﻿@using WebApplication1.Models.Database
+@model Invoice
+@{
+    ViewBag.Title = "AddInvoice";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <div class="row border-bottom">
+        <div class="col-md-6">
+            @Html.Label("Customer")
+            @Html.DropDownListFor(x => x.CustomerID, (List<SelectListItem>)ViewBag.Customer, new { @class = "form-control" })
+            <br />
+            <h1>Shipping Address</h1>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Street")
+                    @Html.TextBoxFor(x => x.Street, new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("City")
+                    @Html.TextBoxFor(x => x.City, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.Label("State")
+                    @Html.TextBoxFor(x => x.State, new { @class = "form-control" })
+                </div>
+                <div class="col-md-4">
+                    @Html.Label("Zip Code")
+                    @Html.TextBoxFor(x => x.ZipCode, new { @class = "form-control" })
+                </div>
+                <div class="col-md-4">
+                    @Html.Label("Country")
+                    @Html.DropDownListFor(x => x.CountryID, (List<SelectListItem>)ViewBag.Country, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            @Html.Label("Invoice Number")
+            @Html.TextBoxFor(x => x.InvoiceNumber, new { @class = "form-control" })
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Invoice Date")
+                    @Html.TextBoxFor(x => x.Date, new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Due Date")
+                    @Html.TextBoxFor(x => x.DueDate, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            @Html.Label("Tags")
+            @Html.DropDownListFor(x => x.TagID, (List<SelectListItem>)ViewBag.Tag, new { @class = "form-control" })
+            <br />
+            @Html.Label("Payment Method")
+            @Html.DropDownListFor(x => x.PaymentMethod, (List<SelectListItem>)ViewBag.PaymentMethod, new { @class = "form-control" })
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Currency")
+                    @Html.DropDownListFor(x => x.CurrencyID, (List<SelectListItem>)ViewBag.Currency, new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Sale Agent")
+                    @Html.DropDownListFor(x => x.SaleAgentID, (List<SelectListItem>)ViewBag.SaleAgent, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Recurring Invoice")
+                    @Html.DropDownListFor(x => x.RecurringInvoice, (List<SelectListItem>)ViewBag.RecurringInvoice, new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Discount Type")
+                    @Html.DropDownListFor(x => x.DiscountType, (List<SelectListItem>)ViewBag.DiscountType, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            @Html.Label("Admin Note")
+            @Html.TextAreaFor(x => x.AdminNote, new { @class = "form-control" })
+            <br /><br /><br />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-3">
+            @Html.DropDownListFor(x => x.ItemID, (List<SelectListItem>)ViewBag.item, new { @class = "form-control" })
+        </div>
+        <div class="col-md-2">
+            @Html.TextBoxFor(x => x.Qty, new { @class = "form-control", type = "number" })
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-primary" href="/Item/AddItem">Add New Item</a>
+        </div>
+    </div>
+    <br />
+    <button class="btn btn-primary">Kaydet</button>
+
+
+</form>
+

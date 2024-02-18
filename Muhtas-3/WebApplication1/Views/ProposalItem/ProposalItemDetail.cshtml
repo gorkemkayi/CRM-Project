@@ -1,0 +1,42 @@
+﻿@using WebApplication1.Models.Database
+@model Proposal
+@{
+    ViewBag.Title = "ProposalItemDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<form method="post" class="form-group">
+
+    
+    <table class="table table-striped">
+        <tr>
+            <th>Item Name</th>
+            <th>Item Description</th>
+            <th>QTY</th>
+            <th>Rate</th>
+            <th>Tax Value</th>
+            <th>Total Amount</th>
+        </tr>
+
+        <tr>
+            @*<td><a class="btn btn-primary" href="/ProposalItem/ProposalItemDetail/@item.ItemID">Order Details</a></td>*@
+            <td>@Html.TextBoxFor(x => x.Item.Name, new { @class = "form-control" })</td>
+            @*<td>@Html.TextArea("hehe", Item.Description, new { @class = "form-control", @style = "width:300px", @readonly = "readonly" })</td>*@
+            <td>@Html.TextAreaFor(x => x.Item.Description, new { @class = "form-control", @style = "width:300px", @readonly = "readonly" })</td>
+            <td>@Html.TextBoxFor(x => x.Qty, new { @class = "form-control", type = "number" })</td>
+            <td>@Html.TextBoxFor(x => x.Item.Rate, new { @class = "form-control" })</td>
+            <td>@Html.TextBoxFor(x => x.Item.Tax.TaxValue, new { @class = "form-control" })</td>
+            <td>@Html.TextBoxFor(x => x.TotalPrice, new { @class = "form-control" })</td>
+
+        </tr>
+    </table>
+    
+</form>
+
+

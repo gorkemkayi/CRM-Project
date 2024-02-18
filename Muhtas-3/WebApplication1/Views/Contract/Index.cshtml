@@ -1,0 +1,151 @@
+﻿@using WebApplication1.Models.Database
+@model List<Contract>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<title>Result Visualization</title>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+        $(document).ready(function () {
+
+            $.ajax({
+
+                type: "POST",
+
+                dataType: "json",
+
+                contentType: "application/json",
+
+                url: '@Url.Action("visualizeContractResult", "Grafik")',
+
+                success: function (result) {
+
+                    google.charts.load('current', {
+
+                        'packages': ['corechart']
+
+                    });
+
+                    google.charts.setOnLoadCallback(function () {
+
+                        drawChart(result);
+
+                    });
+
+                }
+
+            });
+
+        });
+
+
+
+        function drawChart(result) {
+
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'Name');
+
+            data.addColumn('number', 'Marks Obtained');
+
+            var dataArray = [];
+
+
+
+            $.each(result, function (i, obj) {
+
+                dataArray.push([obj.ContractTypes, obj.ContractYypeAdets]);
+
+            });
+
+            data.addRows(dataArray);
+
+
+
+            var columnChartOptions = {
+
+                title: "Contracts By Type",
+
+                width: 1000,
+
+                height: 400,
+
+                bar: { groupWidth: "20%" },
+
+            };
+
+
+
+            var columnChart = new google.visualization.ColumnChart(document
+
+                .getElementById('columnchart_div'));
+
+
+
+            columnChart.draw(data, columnChartOptions);
+
+        }
+
+</script>
+
+
+<div class="row">
+    <div class="col-md-6" id="columnchart_div"></div>
+</div>
+
+<br />
+
+<a class="btn btn-primary" href="/Contract/AddContract">New Contract</a>
+<a class="btn btn-info" href="/Contract/ContractPDF">Export</a>
+<br /><br />
+<table id="tblContract" class="table table-striped mt-2">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Subject</th>
+            <th>Customer</th>
+            <th>Contract Type</th>
+            <th>Contract Value</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Project</th>
+            <th>Signature</th>
+            <th>Edit Contract</th>
+            <th>Delete Contract</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.Subject</td>
+            <td>@item.Customer.Company</td>
+            <td>@item.ContractType.Name</td>
+            <td>@item.ContractValue</td>
+            <td>@item.StartDate.ToString("dd/MM/yyyy")</td>
+            <td>@item.EndDate.ToString("dd/MM/yyyy")</td>
+            <td></td>
+            <td></td>
+            <td><a class="btn btn-primary" href="/Contract/EditContract/@item.ID">Edit</a></td>
+            <td><a class="btn btn-danger" href="/Contract/DeleteContract/@item.ID">Delete</a></td>
+        </tr>
+    }
+</table>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+
+    $('#tblContract').dataTable({});
+
+</script>
+

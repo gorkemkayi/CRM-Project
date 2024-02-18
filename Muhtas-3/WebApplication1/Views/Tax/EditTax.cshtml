@@ -1,0 +1,21 @@
+﻿@using WebApplication1.Models.Database
+@model Tax
+@{
+    ViewBag.Title = "EditTax";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <div class="container">
+        @Html.HiddenFor(x => x.TaxID)
+        @Html.Label("Name")
+        @Html.TextBoxFor(x => x.TaxName, new { @class = "form-control" })
+        <br />
+        @Html.Label("Value")
+        @Html.TextBoxFor(x => x.TaxValue, new { @class = "form-control" })
+        <br />
+        <button class="btn btn-primary">Save</button>
+    </div>
+
+</form>
+

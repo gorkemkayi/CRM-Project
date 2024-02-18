@@ -1,0 +1,47 @@
+﻿@using WebApplication1.Models.Database
+@model Customer
+@{
+    ViewBag.Title = "EditCustomer";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form class="form-group" method="post">
+    @Html.Label("Company")
+    @Html.TextBoxFor(x => x.Company, new { @class = "form-control" })
+    <br />
+    @Html.Label("Vat Number")
+    @Html.TextBoxFor(x => x.VatNumber, new { @class = "form-control" })
+    <br />
+    @Html.Label("Phone")
+    @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+    <br />
+    @Html.Label("Website")
+    @Html.TextBoxFor(x => x.Website, new { @class = "form-control" })
+    <br />
+    @Html.Label("Groups")
+    @Html.DropDownListFor(x => x.GroupId, (List<SelectListItem>)ViewBag.group, "Select Group", new { @class = "form-control" })
+    <br />
+    @Html.Label("Currency")
+    @Html.DropDownListFor(x => x.CurrencyId, (List<SelectListItem>)ViewBag.currency, "Select Currency", new { @class = "form-control" })
+    <br />
+    @Html.Label("Default Language")
+    @Html.DropDownListFor(x => x.LanguageId, (List<SelectListItem>)ViewBag.language, "Select Language", new { @class = "form-control" })
+    <br />
+    @Html.Label("Address")
+    @Html.TextAreaFor(x => x.Address, new { @class = "form-control" })
+    <br />
+    @Html.Label("City")
+    @Html.TextBoxFor(x => x.City, new { @class = "form-control" })
+    <br />
+    @Html.Label("State")
+    @Html.TextBoxFor(x => x.State, new { @class = "form-control" })
+    <br />
+    @Html.Label("Zip Code")
+    @Html.TextBoxFor(x => x.ZipCode, new { @class = "form-control" })
+    <br />
+    @Html.Label("Country")
+    @Html.DropDownListFor(x => x.CountryId, (List<SelectListItem>)ViewBag.country, "Select Country", new { @class = "form-control" })
+    <br />
+    <button class="btn btn-primary">Kaydet</button>
+</form>
+

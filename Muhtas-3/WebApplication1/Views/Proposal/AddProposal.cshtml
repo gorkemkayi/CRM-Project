@@ -1,0 +1,134 @@
+﻿@using WebApplication1.Models.Database
+@model Proposal
+
+@{
+    ViewBag.Title = "AddProposal";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <div class="row border-bottom">
+        <div class="col-md-6">
+            @Html.Label("Subject")
+            @Html.TextBoxFor(x => x.Subject, new { @class = "form-control" })
+            <br />
+            @Html.Label("Related")
+            @Html.TextBoxFor(x => x.Related, new { @class = "form-control" })
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Date")
+                    @Html.TextBoxFor(x => x.Date, new { @class = "form-control" })
+                    <br />
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Open Till")
+                    @Html.TextBoxFor(x => x.OpenTill, new { @class = "form-control" })
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Currency")
+                    @Html.DropDownListFor(x => x.CurrencyId, (List<SelectListItem>)ViewBag.Currency, "Select Currency", new { @class = "form-control" })
+                    <br />
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Discount Type")
+                    @Html.DropDownListFor(x => x.DiscountType, (List<SelectListItem>)ViewBag.DiscountType, new { @class = "form-control" })
+                </div>
+            </div>
+            @Html.Label("Tag")
+            @Html.DropDownListFor(x => x.TagID, (List<SelectListItem>)ViewBag.Tag, "Select Tag", new { @class = "form-control" })
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Status")
+                    @Html.DropDownListFor(x => x.Status, (List<SelectListItem>)ViewBag.Status, new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Assigned")
+                    @Html.DropDownListFor(x => x.AssignedID, (List<SelectListItem>)ViewBag.Assigned, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            @Html.Label("To")
+            @Html.TextBoxFor(x => x.To, new { @class = "form-control" })
+            <br />
+            @Html.Label("Address")
+            @Html.TextAreaFor(x => x.Address, new { @class = "form-control" })
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("City")
+                    @Html.TextBoxFor(x => x.City, new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("State")
+                    @Html.TextBoxFor(x => x.State, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Country")
+                    @Html.DropDownListFor(x => x.CountryID, (List<SelectListItem>)ViewBag.Country, "Nothing Selected", new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Zip Code")
+                    @Html.TextBoxFor(x => x.ZipCode, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Email")
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Phone")
+                    @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+                </div>
+            </div>
+            <br /><br /><br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3" style="margin-top:50px;">
+            @Html.DropDownListFor(x => x.ItemID, (List<SelectListItem>)ViewBag.Item, "Add Item", new { @class = "form-control" })
+
+        </div>
+        <div class="col-md-2" style="margin-top:50px">
+            @Html.TextBoxFor(x => x.Qty, new { @class = "form-control", type = "number" })
+        </div>
+        <div class="col-md-2" style="margin-top:50px">
+            <a href="/Item/AddItem" class="btn btn-primary">Add New Item</a>
+        </div>
+    </div>
+
+    @*<div style="margin-top:25px">
+        <table class="table table-striped">
+            <tr>
+                <th>Item</th>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Rate</th>
+                <th>Tax</th>
+                <th>Amount</th>
+                <th>Settings</th>
+            </tr>
+            <tr>
+                <td>@Html.DropDownListFor(x => x.ItemID, (List<SelectListItem>)ViewBag.Item, "Add Item", new { @class = "form-control" }) </td>  
+            </tr>
+        </table>
+    </div>*@
+    <br />
+    <button class="btn btn-primary">Kaydet</button>
+
+</form>
+
+
+

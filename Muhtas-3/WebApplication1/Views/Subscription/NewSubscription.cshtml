@@ -1,0 +1,35 @@
+﻿@using WebApplication1.Models.Database
+@model Subscription
+@{
+    ViewBag.Title = "NewSubscription";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form class="form-group" method="post">
+    @Html.Label("Billing Plan")
+    @Html.DropDownListFor(x => x.BillingPlan, (List<SelectListItem>)ViewBag.billingPlan, "Select Billing Plan", new { @class = "form-control" })
+    <br />
+    @Html.Label("Quantity")
+    @Html.TextBoxFor(x => x.Qty, new { @class = "form-control", type = "number" })
+    <br />
+    @Html.Label("First Billing Date")
+    @Html.TextBoxFor(x => x.FirstBillingDate, new { @class = "form-control", type = "date" })
+    <br />
+    @Html.Label("Subscription Name")
+    @Html.TextBoxFor(x => x.SubName, new { @class = "form-control" })
+    <br />
+    @Html.Label("Description")
+    @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+    <br />
+    @Html.Label("Customer")
+    @Html.DropDownListFor(x => x.CustomerID, (List<SelectListItem>)ViewBag.customer, "Select Customer", new { @class = "form-control" })
+    <br />
+    @Html.Label("Currency")
+    @Html.DropDownListFor(x => x.CurrencyID, (List<SelectListItem>)ViewBag.currency, "Select Customer", new { @class = "form-control" })
+    <br />
+    @Html.Label("Tax")
+    @Html.DropDownListFor(x => x.TaxID, (List<SelectListItem>)ViewBag.tax, "Select Tax", new { @class = "form-control" })
+    <br />
+    <button class="btn btn-primary">Save</button>
+</form>
+

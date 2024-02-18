@@ -1,0 +1,606 @@
+﻿@*@model IEnumerable<WebApplication1.Models.Database.InvoiceGrup>
+    @model IEnumerable<WebApplication1.Models.Database.DashboardGroups.EstimateGrup>*@
+@model WebApplication1.Models.Database.DashboardViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | Simple Tables</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Dashboard</h1>
+                    </div>
+                   
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <table width="100%">
+                                    <tr class="text-center">
+                                        <th>Invoice Awaiting Pay</th>
+                                    </tr>
+                                    @{
+                                        int totalStatusCount = Model.StatusPaidCount.FirstOrDefault(x => x.Status == "Unpaid")?.StatusCount ?? 0;
+                                        double totalRatio = (double)totalStatusCount / 20;
+                                        string totalWidthStyle = $"width:{totalRatio * 100}%";
+                                    }
+                                    <tr>
+                                        <td>
+                                            <div class="progress progress-l">
+                                                <div class="progress-bar progress-bar-danger" style="@totalWidthStyle"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td>
+                                            <p>Total Status Count: @totalStatusCount</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <table width="100%">
+                                    <tr class="text-center">
+                                        <th>Projects in Progress</th>
+                                    </tr>
+                                    @{
+                                        int totalProjectStatusCount = Model.ProjectStatusDashboard.FirstOrDefault(x => x.ProjectStatusName == "In Progress")?.StatusCount ?? 0;
+                                        double totalProjectRatio = (double)totalProjectStatusCount / 20;
+                                        string totalProjectWidthStyle = $"width:{totalProjectRatio * 100}%";
+                                    }
+
+                                    <tr>
+                                        <td>
+                                            <div class="progress progress-l">
+                                                <div class="progress-bar progress-bar-danger" style="@totalProjectWidthStyle"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td>
+                                            <p>Total Status Count: @totalProjectStatusCount</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <table width="100%">
+                                    <tr class="text-center">
+                                        <th>Converted Leads</th>
+                                    </tr>
+                                    @{
+                                        int totalLeadStatusCount = Model.LeadDashboard.FirstOrDefault(x => x.LeadStatusName == "Customer")?.LeadStatusCount ?? 0;
+                                        double totalLeadRatio = (double)totalLeadStatusCount / 20;
+                                        string totalLeadWidthStyle = $"width:{totalLeadRatio * 100}%";
+                                    }
+
+                                    <tr>
+                                        <td>
+                                            <div class="progress progress-l">
+                                                <div class="progress-bar progress-bar-danger" style="@totalLeadWidthStyle"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td>
+                                            <p>Total Status Count: @totalLeadStatusCount</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Estimate Overview</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Task</th>
+                                            <th>Progress</th>
+                                            <th style="width: 40px">Label</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.EstimateDashboard)
+                                        {
+                                            <tr>
+                                                <td>1.</td>
+                                                <td>@item.StatusName</td>
+                                                <td>
+                                                    <div class="progress progress-xs">
+                                                        @{
+                                                            // Maksimum değeri belirledim (örneğin, 10)
+                                                            int maxValue = 20;
+                                                            // Oranı hesapladım
+                                                            double ratio = (double)item.statusCount / maxValue;
+                                                            // Bar genişliğini orana göre ayarladım
+                                                            string widthStyle = $"width:{ratio * 100}%";
+                                                        }
+                                                        <div class="progress-bar progress-bar-danger" style="@widthStyle"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-danger">@item.statusCount</span></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Proposal Overview</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Task</th>
+                                            <th>Progress</th>
+                                            <th style="width: 40px">Label</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{int proposalIndexNo = 0;}
+                                        @foreach (var item in Model.ProposalDashboard)
+                                        {
+                                            <tr>
+                                                <td>@{proposalIndexNo++;} @proposalIndexNo</td>
+                                                <td>@item.StatusName</td>
+                                                <td>
+                                                    <div class="progress progress-xs">
+                                                        @{
+                                                            // Maksimum değeri belirledim (örneğin, 10)
+                                                            int maxValue = 20;
+                                                            // Oranı hesapladım
+                                                            double ratio = (double)item.StatusCount / maxValue;
+                                                            // Bar genişliğini orana göre ayarladım
+                                                            string widthStyle = $"width:{ratio * 100}%";
+                                                        }
+                                                        <div class="progress-bar progress-bar-danger" style="@widthStyle"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-danger">@item.StatusCount</span></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Invoice Overview</h3>
+                                <div class="card-tools">
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Task</th>
+                                            <th>Progress</th>
+                                            <th style="width: 40px">Label</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{ int IndexNo = 0;}
+                                        @foreach (var x in Model.StatusPaidCount)
+                                        {
+
+                                            <tr>
+                                                <td>@{IndexNo++;} @IndexNo</td>
+                                                <td>@x.Status</td>
+                                                <td>
+                                                    <div class="progress progress-xs">
+                                                        @{
+                                                            // Maksimum değeri belirledim (örneğin, 10)
+                                                            int maxValue = 20;
+                                                            // Oranı hesapladım
+                                                            double ratio = (double)x.StatusCount / maxValue;
+                                                            // Bar genişliğini orana göre ayarladım
+                                                            string widthStyle = $"width:{ratio * 100}%";
+                                                        }
+                                                        <div class="progress-bar progress-bar-danger" style="@widthStyle"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-danger">@x.StatusCount</span></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-6">
+
+                        <!-- /.card -->
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">My Projects</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Project Name</th>
+                                            <th>Start Date</th>
+                                            <th>Deadline</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <style>
+                                            .badge {
+                                                width: 80%;
+                                                text-align: center;
+                                                margin: 5px;
+                                            }
+                                        </style>
+                                        @foreach (var item in Model.ProjectDashboard)
+                                        {
+                                            <tr>
+                                                <td>@item.projectName</td>
+                                                <td>@DateTime.Parse(item.projectDate).ToString("dd/MM/yyyy")</td>
+                                                <td>@DateTime.Parse(item.projectDeadline).ToString("dd/MM/yyyy")</td>
+                                                <td class="badge bg-blue text-center">@item.statusName</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Statistics by Project Status</h3>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="col-md-6" id="Piechart_div"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+
+                <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+                <script>
+        $(document).ready(function () {
+
+            $.ajax({
+
+                type: "POST",
+
+                dataType: "json",
+
+                contentType: "application/json",
+
+                url: '@Url.Action("visualizeContractResult2", "Grafik")',
+
+                success: function (result) {
+
+                    google.charts.load('current', {
+
+                        'packages': ['corechart']
+
+                    });
+
+                    google.charts.setOnLoadCallback(function () {
+
+                        drawChart(result);
+
+                    });
+
+                }
+
+            });
+
+        });
+
+
+
+        function drawChart(result) {
+
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'Name');
+
+            data.addColumn('number', 'Marks Obtained');
+
+            var dataArray = [];
+
+
+
+            $.each(result, function (i, obj) {
+
+                dataArray.push([obj.ProjectStatusName, obj.ProjectStatusCount]);
+
+            });
+
+            data.addRows(dataArray);
+
+
+
+            var PieChartOptions = {
+
+                title: "Contracts By Type",
+
+                width: 680,
+
+                height: 300,
+
+                bar: { groupWidth: "20%" },
+
+            };
+
+
+
+            var columnChart = new google.visualization.PieChart(document
+
+                .getElementById('Piechart_div'));
+
+
+
+            columnChart.draw(data, PieChartOptions);
+
+        }
+
+                </script>
+
+
+                @*<div class="row">
+            <div class="col-md-6" id="Piechart_div"></div>
+        </div>*@
+
+               
+                <!-- /.row -->
+                <!--<div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Responsive Hover Table</h3>
+
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <!-- /.card-header -->
+                <!--<div class="card-body table-responsive p-0">
+        <table class="table table-hover text-nowrap">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>183</td>
+                    <td>John Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-success">Approved</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                </tr>
+                <tr>
+                    <td>219</td>
+                    <td>Alexander Pierce</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-warning">Pending</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                </tr>
+                <tr>
+                    <td>657</td>
+                    <td>Bob Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-primary">Approved</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                </tr>
+                <tr>
+                    <td>175</td>
+                    <td>Mike Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-danger">Denied</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>-->
+                <!-- /.card-body -->
+                <!--</div>-->
+                <!-- /.card -->
+                <!--</div>
+    </div>-->
+                <!-- /.row -->
+                <!--<div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Fixed Header Table</h3>
+
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <!-- /.card-header -->
+                <!--<div class="card-body table-responsive p-0" style="height: 300px;">
+        <table class="table table-head-fixed text-nowrap">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>183</td>
+                    <td>John Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-success">Approved</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                </tr>
+                <tr>
+                    <td>219</td>
+                    <td>Alexander Pierce</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-warning">Pending</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                </tr>
+                <tr>
+                    <td>657</td>
+                    <td>Bob Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-primary">Approved</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                </tr>
+                <tr>
+                    <td>175</td>
+                    <td>Mike Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-danger">Denied</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                </tr>
+                <tr>
+                    <td>134</td>
+                    <td>Jim Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-success">Approved</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                </tr>
+                <tr>
+                    <td>494</td>
+                    <td>Victoria Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-warning">Pending</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                </tr>
+                <tr>
+                    <td>832</td>
+                    <td>Michael Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-primary">Approved</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                </tr>
+                <tr>
+                    <td>982</td>
+                    <td>Rocky Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-danger">Denied</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>-->
+                <!-- /.card-body -->
+                <!--</div>-->
+                <!-- /.card -->
+                <!--</div>
+    </div>-->
+                <!-- /.row -->
+
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,58 @@
+﻿@using WebApplication1.Models.Database
+@model List<Expense>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<a class="btn btn-primary" href="/Expense/AddExpense">Record Expense</a>
+<a class="btn btn-info" href="/Expense/ExpensePDF">Export</a>
+<br /><br />
+<table id="tblExpense" class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Name</th>
+            <th>Receipt</th>
+            <th>Date</th>
+            <th>Project</th>
+            <th>Customer</th>
+            <th>Invoice</th>
+            <th>Reference</th>
+            <th>Payment Mode</th>
+            <th>Edit Expense</th>
+            <th>Delete Expense</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ExpenseCategory.Name</td>
+            <td>@item.Amount</td>
+            <td>@item.Name</td>
+            <td></td>
+            <td>@item.ExpenseDate.ToString("dd/MM/yyyy")</td>
+            <td></td>
+            <td>@item.Customer.Company</td>
+            <td></td>
+            <td>@item.Reference</td>
+            <td>@item.PaymentMode</td>
+            <td><a class="btn btn-info" href="/Expense/EditExpense/@item.ID">Edit</a></td>
+            <td><a class="btn btn-danger" href="/Expense/DeleteExpense/@item.ID">Delete</a></td>
+        </tr>
+    }
+</table>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+
+    $('#tblExpense').dataTable({});
+
+</script>
+

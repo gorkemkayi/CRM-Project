@@ -1,0 +1,63 @@
+﻿@using WebApplication1.Models.Database
+@model Expense
+@{
+    ViewBag.Title = "AddExpense";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form class="form-group mt-4" method="post">
+    <div class="row">
+        <div class="col-md-5">
+            <h4>Add New Expense</h4>
+            <div class="shadow rounded">
+                <div class="m-3">
+                    <br />
+                    @Html.Label("Name")
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                    <br />
+                    @Html.Label("Note")
+                    @Html.TextAreaFor(x => x.Note, new { @class = "form-control" })
+                    <br />
+                    @Html.Label("Expense Category")
+                    @Html.DropDownListFor(x => x.ExpenseCategoryID, (List<SelectListItem>)ViewBag.ExpenseCategory, "Select Category", new { @class = "form-control" })
+                    <br />
+                    @Html.Label("Expense Date")
+                    @Html.TextBoxFor(x => x.ExpenseDate, new { @class = "form-control", type = "date" })
+                    <br />
+                    @Html.Label("Amount")
+                    @Html.TextBoxFor(x => x.Amount, new { @class = "form-control", type = "number" })
+                    <br />
+                    @Html.Label("Customer")
+                    @Html.DropDownListFor(x => x.CustomerID, (List<SelectListItem>)ViewBag.Customer, new { @class = "form-control" })
+                    <br />
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-5">
+            <h4>Advanced Options</h4>
+            <div class="shadow rounded">
+                <div class="m-3">
+                    <br />
+                    @Html.Label("Currency")
+                    @Html.DropDownListFor(x=>x.CurrencyID,(List<SelectListItem>)ViewBag.Currency,"Select Currency", new { @class = "form-control" })
+                <br />
+                    @Html.Label("Tax")
+                    @Html.DropDownListFor(x=>x.TaxID,(List<SelectListItem>)ViewBag.Tax,"Select Tax", new { @class = "form-control" })
+                <br />
+                    @Html.Label("Payment Mode")
+                    @Html.DropDownListFor(x=>x.PaymentMode,(List<SelectListItem>)ViewBag.PaymentMode, new { @class = "form-control" })
+                <br />
+                    @Html.Label("Reference")
+                    @Html.TextBoxFor(x=>x.Reference, new { @class = "form-control" })
+                <br />
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-success">Save</button>
+</form>
+

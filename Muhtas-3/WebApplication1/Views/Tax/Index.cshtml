@@ -1,0 +1,43 @@
+﻿@using WebApplication1.Models.Database
+@model List<Tax>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-3">
+    <a class="btn btn-primary" href="/Tax/NewTax">New Tax</a>
+    <a class="btn btn-info" href="/Tax/TaxPDF">Export</a>
+    <br /><br />
+    <table id="tblTax" class="table table-bordered shadow mt-4">
+        <thead>
+            <tr class="bg-danger">
+                <th>ID</th>
+                <th style="width:70%">Name</th>
+                <th>Value</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TaxID</td>
+                <td>@item.TaxName</td>
+                <td>@item.TaxValue</td>
+                <td class="text-center"><a class="fas fa-edit" href="/Tax/EditTax/@item.TaxID" style="color:yellowgreen;"></a> <a class="fas fa-trash ml-3" style="color:red;" href="/Tax/DeleteTax/@item.TaxID"></a></td>
+            </tr>
+        }
+    </table>
+</div>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+
+    $('#tblTax').dataTable({});
+
+</script>

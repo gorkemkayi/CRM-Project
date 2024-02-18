@@ -1,0 +1,62 @@
+﻿@using WebApplication1.Models.Database
+@model Project
+@{
+    ViewBag.Title = "AddProject";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <div class="container shadow">
+        @Html.Label("Project Name")
+        @Html.TextBoxFor(x => x.ProjectName, new { @class = "form-control" })
+        <br />
+        @Html.Label("Customer")
+        @Html.DropDownListFor(x => x.CustomerID, (List<SelectListItem>)ViewBag.Customer, "Select", new { @class = "form-control" })
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                @Html.Label("Billing Type")
+                @Html.DropDownListFor(x => x.BillingType, (List<SelectListItem>)ViewBag.BillingType, "Select", new { @class = "form-control" })
+            </div>
+            <div class="col-md-6">
+                @Html.Label("Status")
+                @Html.DropDownListFor(x => x.Status, (List<SelectListItem>)ViewBag.Status, "Select", new { @class = "form-control" })
+            </div>
+        </div>
+        <br />
+        @Html.Label("Total Rate")
+        @Html.TextBoxFor(x => x.TotalRate, new { @class = "form-control", type = "number" })
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                @Html.Label("Estimated Hours")
+                @Html.TextBoxFor(x => x.EstimatedHours, new { @class = "form-control" })
+            </div>
+            <div class="col-md-6">
+                @Html.Label("Members")
+                @Html.DropDownListFor(x => x.MemberID, (List<SelectListItem>)ViewBag.Members, "select", new { @class = "form-control" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                @Html.Label("Start Date")
+                @Html.TextBoxFor(x => x.StartDate, new { @class = "form-control", type = "date" })
+            </div>
+            <div class="col-md-6">
+                @Html.Label("Deadline")
+                @Html.TextBoxFor(x => x.Deadline, new { @class = "form-control", type = "date" })
+            </div>
+        </div>
+        <br />
+        @Html.Label("Tag")
+        @Html.DropDownListFor(x => x.TagID, (List<SelectListItem>)ViewBag.Tags, new { @class = "form-control" })
+        <br />
+        @Html.Label("Description")
+        @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+        <br />
+        <button class="btn btn-primary mb-3">Save</button>
+    </div>
+   
+</form>
+

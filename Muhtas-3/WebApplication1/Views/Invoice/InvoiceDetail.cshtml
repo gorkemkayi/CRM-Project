@@ -1,0 +1,32 @@
+﻿@using WebApplication1.Models.Database
+@model List<Invoice>
+@{
+    ViewBag.Title = "InvoiceDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-striped">
+    <tr>
+        <th>Item Name</th>
+        <th>Item Description</th>
+        <th>QTY</th>
+        <th>Rate</th>
+        <th>Tax Value</th>
+        <th>Total Amount</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Item.Name</td>
+            <td>@Html.TextArea("hehe", item.Item.Description, new { @class = "form-control", @style = "width:300px", @readonly = "readonly" })</td>
+            <td>@item.Qty</td>
+            <td>@item.Item.Rate</td>
+            <td>@item.Item.Tax.TaxValue</td>
+            <td>@item.Amount</td>
+
+        </tr>
+    }
+
+</table>
+<a class="btn btn-primary" href="/Invoice/Index">Approve</a>
+

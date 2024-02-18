@@ -1,0 +1,15 @@
+﻿@using WebApplication1.Models.Database
+@model Priority
+@{
+    ViewBag.Title = "EditPriority";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<form class="form-group" method="post">
+    <div class="container">
+        @Html.Label("Name")
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        <br />
+        <button class="btn btn-primary">Save</button>
+    </div>
+
+</form>

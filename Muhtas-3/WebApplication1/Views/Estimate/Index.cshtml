@@ -1,0 +1,54 @@
+﻿@using WebApplication1.Models.Database
+@model List<Estimate>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<a class="btn btn-danger mb-3" href="/Estimate/AddEstimate">Create New Estimate</a>
+<a class="btn btn-info mb-3" href="/Estimate/EstimatePDF">Export</a>
+
+<table id="tblEstimate" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Estimate #</th>
+            <th>Amount</th>
+            <th>Total Tax</th>
+            <th>Customer</th>
+            <th>Project</th>
+            <th>Tags</th>
+            <th>Date</th>
+            <th>Expiry Date</th>
+            <th>Reference #</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.EstimateNumber</td>
+            <td>@item.Amount</td>
+            <td>@item.Item.Tax.TaxValue</td>
+            <td>@item.Customer.Company</td>
+            <td></td>
+            <td>@item.Tag.Name</td>
+            <td>@item.EstimateDate.ToString("dd/MM/yyyy")</td>
+            <td>@item.ExpiryDate.ToString("dd/MM/yyyy")</td>
+            <td>@item.Reference</td>
+            <td>@item.Status</td>
+        </tr>
+    }
+</table>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+
+    $('#tblEstimate').dataTable({});
+
+</script>
+

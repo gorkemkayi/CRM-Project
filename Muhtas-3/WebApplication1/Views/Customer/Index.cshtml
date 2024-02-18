@@ -1,0 +1,137 @@
+﻿@using WebApplication1.Models.Database
+@model List<Customer>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<a class="btn btn-primary mb-3" href="/Customer/AddCustomer">New Customer</a>
+<a class="btn btn-secondary mb-3" href="/Contact/ContactList">Contacts</a>
+<a class="btn btn-info mb-3" href="/Customer/CustomerPDF">Export</a>
+
+
+<div>
+    <h3><i class="fa fa-file" style="color:navajowhite"></i> Customer Summary</h3>
+    <div class="row">
+        <div class="col-md">
+            <span class="text-bold">@ViewBag.CustomerCount</span> <span>Total Customers</span>
+        </div>
+        <div class="col-md">
+            @if (ViewBag.activeCustomerCount == 0)
+            {
+                <span class="text-bold">0</span> <span class="text-green">Active Customers</span>
+            }
+            else
+            {
+                <span class="text-bold">@ViewBag.activeCustomerCount</span> <span class="text-green">Active Customers</span>
+            }
+        </div>
+        <div class="col-md">
+            @if (ViewBag.InactiveCustomerCount == 0)
+            {
+                <span class="text-bold">0</span> <span class="text-danger">Inactive Customers</span>
+            }
+            else
+            {
+                <span class="text-bold">@ViewBag.InactiveCustomerCount</span> <span class="text-danger">Inactive Customers</span>
+            }
+        </div>
+        <div class="col-md">
+            @if (ViewBag.activeContactCount == 0)
+            {
+                <span class="text-bold">0</span> <span class="text-blue">Active Contacts</span>
+            }
+            else
+            {
+                <span class="text-bold">@ViewBag.activeContactCount</span> <span class="text-blue">Active Contacts</span>
+            }
+        </div>
+        <div class="col-md">
+            @if (ViewBag.InactiveContactCount == 0)
+            {
+                <span class="text-bold">0</span> <span class="text-danger">Inactive Contacts</span>
+            }
+            else
+            {
+                <span class="text-bold">@ViewBag.InactiveContactCount</span> <span class="text-danger">Inactive Contacts</span>
+            }
+        </div>
+    </div>
+</div>
+<br />
+
+<table id="tbl1" class="table table-striped">
+    <thead>
+        <tr class="table-danger">
+            <th>#</th>
+            <th>Company</th>
+            <th>Contact Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Groups</th>
+            <th>Contact</th>
+            <th>Add Contact</th>
+            <th>Edit Customer</th>
+            <th>Delete Customer</th>
+        </tr>
+    </thead>
+    @{int rowNumber = 1; }
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@rowNumber</td>
+            <td>@item.Company</td>
+
+            <td>
+                @if (item.Contacts.Any())
+                {
+                    <span>@item.Contacts.FirstOrDefault().FirstName</span>
+                }
+                else
+                {
+                    <span>Contact Yok</span>
+                }
+            </td>
+
+
+            <td>
+                @if (item.Contacts.Any())
+                {
+                    <span>@item.Contacts.FirstOrDefault().Email</span>
+                }
+                else
+                {
+                    <span>Contact Yok</span>
+                }
+            </td>
+            <td>@item.Phone</td>
+            <td>@item.Group.GroupName</td>
+            <td><a href="/Contact/Index/@item.ID" class="btn btn-primary">Contact</a></td>
+            <td><a href="/Contact/AddContact/@item.ID" class="btn btn-primary">Add Contact</a></td>
+            <td><a class="btn btn-warning" href="/Customer/EditCustomer/@item.ID">Edit</a></td>
+            <td><a class="btn btn-danger" href="/Customer/DeleteCustomer/@item.ID">Delete</a></td>
+        </tr>
+
+        {
+            rowNumber++;
+        }
+
+    }
+</table>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+
+    $('#tbl1').dataTable({});
+
+</script>
+
+
+

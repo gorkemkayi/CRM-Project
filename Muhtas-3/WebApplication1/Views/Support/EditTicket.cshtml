@@ -1,0 +1,83 @@
+﻿@using WebApplication1.Models.Database
+@model Support
+@{
+    ViewBag.Title = "EditTicket";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container shadow">
+    <h2>Ticket Information</h2>
+    <form class="form-group" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                @Html.Label("Subject")
+                @Html.TextBoxFor(x => x.Subject, new { @class = "form-control" })
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.Label("Name")
+                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.Label("Email Address")
+                        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.Label("Department")
+                        @Html.DropDownListFor(x => x.DepartmentID, (List<SelectListItem>)ViewBag.Department, "Select", new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.Label("CC")
+                        @Html.TextBoxFor(x => x.CC, new { @class = "form-control" })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md">
+                        @Html.Label("Date")
+                        @Html.TextBoxFor(x => x.CreatedTime, new { @class = "form-control", type = "date" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                @Html.Label("Tag")
+                @Html.DropDownListFor(x => x.TagID, (List<SelectListItem>)ViewBag.Tag, "Select", new { @class = "form-control" })
+                <br />
+                @Html.Label("Assign Ticket")
+                @Html.DropDownListFor(x => x.AssignTicket, (List<SelectListItem>)ViewBag.AssignTicket, "Select", new { @class = "form-control" })
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.Label("Priority")
+                        @Html.DropDownListFor(x => x.Priority, (List<SelectListItem>)ViewBag.Priority, "Select", new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.Label("Service")
+                        @Html.TextBoxFor(x => x.Service, new { @class = "form-control" })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md">
+                        @Html.Label("Change Status")
+                        @Html.DropDownListFor(x=>x.SupportStatusID,(List<SelectListItem>)ViewBag.ChangeStatus, new { @class = "form-control" })
+                    </div>
+                </div>
+                <br />
+                @Html.Label("Project")
+                @Html.DropDownListFor(x => x.ProjectID, (List<SelectListItem>)ViewBag.Project, "Select", new { @class = "form-control" })
+            <br />
+            </div>
+            <div class="col-md">
+                @Html.Label("Ticket Body")
+                @Html.TextAreaFor(x => x.Message, new { @class = "form-control" })
+            </div>
+        </div>
+        <br />
+        <button class="btn btn-primary mb-3">Save</button>
+    </form>
+</div>
+

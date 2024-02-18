@@ -1,0 +1,64 @@
+﻿@using WebApplication1.Models.Database
+@model List<Proposal>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<a href="/Proposal/AddProposal" class="btn btn-primary text-white" style="margin-bottom:20px">New Proposal</a>
+<a class="btn btn-info mb-3" href="/Proposal/ProposalPDF">Export</a>
+<div>
+<table id="tblProposal" class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Subject</th>
+            <th>To</th>
+            @*<th>Total</th>*@
+            <th>Date</th>
+            <th>Open Till</th>
+            <th>Project</th>
+            <th>Tags</th>
+            @*<th>Date Created</th>*@
+            <th>Status</th>
+            <th>Proposal Detail</th>
+            <th>Edit Proposal</th>
+        </tr>
+    </thead>
+    @{ int rowNumber = 1;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>Pro-@rowNumber</td>
+            <td>@item.Subject</td>
+            <td>@item.To</td>
+            @*<td>@item.TotalPrice</td>*@
+            <td>@item.Date.ToString("dd/MM/yyyy")</td>
+            <td>@item.OpenTill.ToString("dd/MM/yyyy")</td>
+            <td></td>
+            <td>@item.Tag.Name</td>
+            <td style="color:blue">@item.Status</td>
+            <td><a class="btn btn-danger" href="/ProposalItem/Index/@item.ProposalID">Proposal Details</a></td>
+            <td><a class="btn btn-info" href="/Proposal/EditProposal/@item.ProposalID">Edit</a></td>
+        </tr>
+        {
+            rowNumber++;
+        }
+    }
+</table>
+
+</div>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+
+    $('#tblProposal').dataTable({});
+
+</script>
+
+
+

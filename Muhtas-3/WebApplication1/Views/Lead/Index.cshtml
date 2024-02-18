@@ -1,0 +1,61 @@
+﻿@using WebApplication1.Models.Database
+@model List<Lead>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<a class="btn btn-primary" href="/Lead/NewLead">New Lead</a>
+<a class="btn btn-info" href="/Lead/LeadPDF">Export</a>
+
+<br /><br />
+<table id="tblLead" class="table table-striped shadow mt-3">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Company</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Value</th>
+            <th>Tags</th>
+            <th>Assigned</th>
+            <th>Status</th>
+            <th>Source</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.Name</td>
+            <td>@item.Company</td>
+            <td>@item.Email</td>
+            <td>@item.Phone</td>
+            <td>@item.LeadValue</td>
+            <td>@item.Tag.Name</td>
+            <td>@item.Assigned.Name</td>
+            <td>@item.LeadStatus.Name</td>
+            <td>@item.LeadSource.Name</td>
+            <td><a class="btn btn-primary" href="/Lead/ListLead/@item.ID">Details</a></td>
+            <td><a class="btn btn-info" href="/Lead/EditLead/@item.ID">Edit</a></td>
+            <td><a class="btn btn-danger" href="/Lead/Delete/@item.ID">Delete</a></td>
+        </tr>
+    }
+</table>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+
+    $('#tblLead').dataTable({});
+
+</script>
+

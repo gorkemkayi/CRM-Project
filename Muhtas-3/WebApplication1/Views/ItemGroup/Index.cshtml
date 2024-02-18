@@ -1,0 +1,23 @@
+﻿@using WebApplication1.Models.Database
+@model List<ItemGroup>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<a class="btn btn-primary" href="/ItemGroup/AddNewItemGroup">New Group</a>
+<table class="table table-striped mt-3">
+    <tr>
+        <th>ID</th>
+        <th>Item Group Name</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.Name</td>
+        </tr>
+    }
+
+</table>
+

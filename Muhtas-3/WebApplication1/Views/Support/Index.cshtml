@@ -1,0 +1,80 @@
+﻿@using WebApplication1.Models.Database
+@model List<Support>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <a class="btn btn-primary mt-3" href="/Support/NewTicket">New Ticket</a>
+    <a class="btn btn-info mt-3" href="/Support/SupportPDF">Export</a>
+
+</div>
+<div class="container shadow mt-3">
+    <h2>Tickets Summary</h2>
+    <div class="row">
+        <div class="col-md">
+            <span class="text-bold">@ViewBag.Open</span> <span class="text-red">Open</span>
+        </div>
+        <div class="col-md">
+            <span class="text-bold">@ViewBag.InProgress</span> <span class="text-orange">In Progress</span>
+        </div>
+        <div class="col-md">
+            <span class="text-bold">@ViewBag.Answered</span> <span class="text-green">Answered</span>
+        </div>
+        <div class="col-md">
+            <span class="text-bold">@ViewBag.OnHold</span> <span class="text-blue">On Hold</span>
+        </div>
+        <div class="col-md">
+            <span class="text-bold">@ViewBag.Closed</span> <span class="text-red">Closed</span>
+        </div>
+    </div>
+    <br />
+    <table id="tblSupport" class="table table-striped mb-3">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Subject</th>
+                <th>Tags</th>
+                <th>Department</th>
+                <th>Service</th>
+                <th>Contact</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Created</th>
+                <th>Add Reply</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.Subject</td>
+                <td>@item.Tag.Name</td>
+                <td>@item.Department.Name</td>
+                <td>@item.Service</td>
+                <td>@item.Name</td>
+                <td>@item.SupportStatus.Name</td>
+                <td>@item.Priority.Name</td>
+                <td>@item.CreatedTime.ToString("dd/MM/yyyy")</td>
+                <td><a class="btn btn-primary" href="/Support/AddReply/@item.ID">Reply</a></td>
+                <td><a class="btn btn-info" href="/Support/EditTicket/@item.ID">Edit</a></td>
+                <td><a class="btn btn-danger" href="/Support/DeleteTicket/@item.ID">Delete</a></td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+
+    $('#tblSupport').dataTable({});
+
+</script>

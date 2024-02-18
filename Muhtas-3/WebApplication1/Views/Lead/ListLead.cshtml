@@ -1,0 +1,77 @@
+﻿@using WebApplication1.Models.Database
+@model List<Lead>
+@{
+    ViewBag.Title = "ListLead";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Lead Information</h2>
+
+<table class="table table-bordered shadow mt-3">
+    <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Email</th>
+        <th>Website</th>
+        <th>Phone</th>
+        <th>LeadValue</th>
+        
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Position</td>
+            <td>@item.Email</td>
+            <td>@item.Website</td>
+            <td>@item.Phone</td>
+            <td>@item.LeadValue</td>
+            
+            
+        </tr>
+    }
+</table>
+<table class="table table-bordered shadow mt-3">
+    <tr>
+        <th>Company</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>ZipCode</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Company</td>
+            <td>@item.Address</td>
+            <td>@item.City</td>
+            <td>@item.State</td>
+            <td>@item.Country.CountryName</td>
+            <td>@item.ZipCode</td>
+        </tr>
+    }
+</table>
+<br />
+<h2>General Information</h2>
+<table class="table table-bordered shadow mt-3">
+    <tr>
+        <th>Status</th>
+        <th>Source</th>
+        <th>Language</th>
+        <th>Assigned</th>
+        <th>Tag</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.LeadStatus.Name</td>
+            <td>@item.LeadSource.Name</td>
+            <td>@item.Language.LanguageName</td>
+            <td>@item.Assigned.Name</td>
+            <td>@item.Tag.Name</td>
+        </tr>
+    }
+</table>
+<td><a class="btn btn-info" href="/Lead/Index">Go Back</a></td>

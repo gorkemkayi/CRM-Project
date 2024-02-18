@@ -1,0 +1,49 @@
+﻿@using WebApplication1.Models.Database
+@model List<Payment>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<a class="btn btn-info mb-3" href="/Payment/PaymentPDF">Export</a>
+
+<table id="tblPayment" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Payment#</th>
+            <th>Invoice#</th>
+            <th>Payment Mode</th>
+            <th>Transaction ID</th>
+            <th>Customer</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td><span style="color:blue;">INV-@item.Invoice.ID</span></td>
+            <td>@item.Invoice.PaymentMethod</td>
+            <td>@item.TransactionID</td>
+            <td><span style="color:blue;">@item.Invoice.Customer.Company</span></td>
+            <td>@item.AmountReceived</td>
+            <td>@item.PaymentDate.ToString("dd/MM/yyyy")</td>
+        </tr>
+    }
+
+
+</table>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+
+    $('#tblPayment').dataTable({});
+
+</script>
+

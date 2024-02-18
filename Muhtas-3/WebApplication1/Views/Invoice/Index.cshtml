@@ -1,0 +1,72 @@
+﻿@using WebApplication1.Models.Database
+@model List<Invoice>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<a class="btn btn-danger" href="/Invoice/AddInvoice">Create New Invoice</a>
+<a class="btn btn-info" href="/Invoice/InvoicePDF">Export</a>
+<br />
+<br />
+<table id="tblInvoice" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Invoice #</th>
+            <th>Amount</th>
+            <th>Total Tax</th>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Project</th>
+            <th>Tags</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Payment</th>
+            <th>Invoice Detail</th>
+            <th>Delete Invoice</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.InvoiceNumber</td>
+            <td>@item.Amount</td>
+            <td>@item.Item.Tax.TaxValue</td>
+            <td>@item.Date.ToString("dd/MM/yyyy")</td>
+            <td>@item.Customer.Company</td>
+            <td>@item.Project</td>
+            <td>@item.Tag.Name</td>
+            <td>@item.DueDate.ToString("dd/MM/yyyy")</td>
+            <td>
+                @if (@item.Status == "Paid")
+                {
+                    <span style="color:green;"> @item.Status</span>
+                }
+                else if (item.Status == "Partially Paid")
+                {
+                    <span style="color:orange">@item.Status</span>
+                }
+                else
+                {
+                    <span style="color:red;">Unpaid</span>
+                }
+            </td>
+            <td><a href="/Payment/AddPayment/@item.ID" class="btn btn-success">Payment</a></td>
+            <td><a href="/Invoice/InvoiceDetail/@item.ID" class="btn btn-primary">Details</a></td>
+            <td><a href="/Invoice/DeleteInvoice/@item.ID" class="btn btn-danger">Delete</a></td>
+        </tr>
+    }
+</table>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+
+    $('#tblInvoice').dataTable({});
+
+</script>
+
